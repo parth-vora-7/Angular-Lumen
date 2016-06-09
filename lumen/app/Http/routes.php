@@ -15,4 +15,5 @@ $app->get('/', function () use ($app) {
     return $app->version();
 });
 
+$app->post('/users', 'UserController@getUsers');
 $app->get('/users', 'UserController@getUsers');

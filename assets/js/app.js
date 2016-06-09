@@ -2,7 +2,14 @@ var app = angular.module('ngApp', ['datatables', 'ngResource']);
 app.constant('END_POINT', 'lumen/public');
 app.controller('ngCtrl', ['$location', 'END_POINT', '$scope', 'DTOptionsBuilder', 'DTColumnBuilder',
     function ($location, END_POINT, $scope, DTOptionsBuilder, DTColumnBuilder) {
-    $scope.dtOptions = DTOptionsBuilder.fromSource($location.$$absUrl + END_POINT + '/users'); //newOptions().withPaginationType('full_numbers').withDisplayLength(2);
+    $scope.dtOptions = DTOptionsBuilder.newOptions().
+            withOption('ajax', { 
+              url: $location.$$absUrl + END_POINT + '/users', type: 'post'
+            })
+            .withDataProp('data')
+            .withOption('serverSide', true)
+            .withOption('processing', true);
+    //newOptions().withPaginationType('full_numbers').withDisplayLength(2);
     $scope.dtColumns = [
         DTColumnBuilder.newColumn('first_name').withTitle('First name'),
         DTColumnBuilder.newColumn('last_name').withTitle('Last name'),

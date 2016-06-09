@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
+use Yajra\Datatables\Facades\Datatables;
 
 class UserController extends Controller
 {
@@ -17,6 +18,7 @@ class UserController extends Controller
 
     public function getUsers()
     {
+      return Datatables::eloquent(User::query())->make(true);
       return User::all();
     }
 }
