@@ -1,4 +1,4 @@
-var app = angular.module('ngApp', ['datatables', 'ngResource', 'datatables.colreorder', 'datatables.columnfilter']);
+var app = angular.module('ngApp', ['datatables', 'ngResource', 'datatables.colreorder', 'datatables.light-columnfilter']);
 app.constant('END_POINT', 'lumen/public');
 app.controller('ngCtrl', ['$location', 'END_POINT', '$scope', 'DTOptionsBuilder', 'DTColumnBuilder',
   function ($location, END_POINT, $scope, DTOptionsBuilder, DTColumnBuilder) {
@@ -9,7 +9,12 @@ app.controller('ngCtrl', ['$location', 'END_POINT', '$scope', 'DTOptionsBuilder'
             .withDataProp('data')
             .withOption('serverSide', true)
             .withOption('processing', true)
-            .withColReorder();
+            .withColReorder()
+            .withLightColumnFilter({
+                '0' : {
+                    type : 'text'
+                }
+            });
     
     $scope.dtColumns = [
       DTColumnBuilder.newColumn('id').notVisible(),
