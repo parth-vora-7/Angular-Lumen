@@ -19,6 +19,5 @@ class UserController extends Controller
     public function getUsers()
     {
       return Datatables::eloquent(User::query())->make(true);
-      return User::all();
     }
 }
